@@ -2,7 +2,7 @@
 
 Owin middleware for [Cassette](https://github.com/andrewdavey/cassette)
 
-This is an Owin implementation of Cassette.Aspnet to allow serving assets independantly from your site's framework.
+This is an Owin implementation of Cassette.Aspnet to allow serving assets independently from your site's framework.
 
 
 ## Copyright and license
