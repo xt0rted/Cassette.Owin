@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Cassette</title>
+		<style type="text/css">
+			@-ms-viewport
+			{
+				width: device-width;
+			}
+
+			html
+			{
+				background: #fff;
+			}
+
+			body
+			{
+				font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+				font-size: .813em;
+				line-height: 1.4em;
+				color: #222;
+			}
+
+			h1, h2, h3, h4, h5
+			{
+				font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+				font-weight: 500;
+			}
+
+			h1
+			{
+				color: #44525e;
+				margin: 15px 5px 0 0;
+			}
+
+			h2
+			{
+				margin: 10px 5px 0 0;
+			}
+
+			h3
+			{
+				color: #363636;
+				margin: 5px 5px 0 0;
+			}
+
+			a
+			{
+				color: #1ba1e2;
+				text-decoration: none;
+			}
+
+				a:hover
+				{
+					color: #13709e;
+					text-decoration: underline;
+				}
+
+			code
+			{
+				font-family: consolas, "Courier New", courier, monospace;
+			}
+
+			#tabs > ul
+			{
+				font-size: 18px;
+				padding-left: 0px;
+				padding-right: 0px;
+				padding-top: 15px;
+				padding-bottom: 15px;
+				border-top: 1px #ddd solid;
+				border-bottom: 1px #ddd solid;
+				margin-bottom: 0px;
+			}
+
+				#tabs > ul > li
+				{
+					display: inline;
+				}
+
+					#tabs > ul > li a.active
+					{
+						background: #44C5F2;
+						color: #fff;
+					}
+
+					#tabs > ul > li a
+					{
+						margin: 5px;
+						padding: 5px;
+						color: #a0a0a0;
+						text-decoration: none;
+					}
+
+						#tabs > ul > li a:hover
+						{
+							background: #A9E4F9;
+							color: #fff;
+							cursor: pointer;
+						}
+
+			.content a:not([href])
+			{
+				color: #000;
+				text-decoration: none;
+			}
+
+			.content > div > ul
+			{
+				list-style: none;
+				padding-left: 0;
+				margin: 0;
+			}
+
+			.content .bundle:hover
+			{
+				background-color: #f7f7f9;
+				text-decoration: none;
+			}
+
+			.content .bundle
+			{
+				padding: 5px;
+				border-bottom: 1px #ddd solid;
+			}
+
+				.content .bundle h3
+				{
+					padding: 5px;
+					margin: 0;
+				}
+
+			.content ul
+			{
+				list-style: none;
+			}
+
+			.content table
+			{
+				border-collapse: separate;
+				border-spacing: 0;
+				margin: 0 0 20px;
+			}
+
+			.content th
+			{
+				vertical-align: bottom;
+				padding: 10px 5px 5px 5px;
+				font-weight: 400;
+				color: #a0a0a0;
+				text-align: left;
+			}
+
+			.content td
+			{
+				padding: 3px 10px;
+			}
+
+			.content th,
+			.content td
+			{
+				border-right: 1px #ddd solid;
+				border-bottom: 1px #ddd solid;
+				border-left: 1px transparent solid;
+				border-top: 1px transparent solid;
+				box-sizing: border-box;
+			}
+
+				.content th:last-child,
+				.content td:last-child
+				{
+					border-right: 1px transparent solid;
+				}
+
+				.content td.length
+				{
+					text-align: right;
+				}
+		</style>
+	</head>
+	<body>
+		<h1>Cassette.Owin Diagnostics</h1>
+		<div id="tabs">
+			<ul class="nav">
+				<li><a href="#about">Cassette</a></li>
+				<li><a href="#scripts">Scripts</a></li>
+				<li><a href="#stylesheets">Stylesheets</a></li>
+				<li><a href="#htmltemplates">HTML Templates</a></li>
+				<li><a href="#trace">Start-up Trace</a></li>
+			</ul>
+			<div class="content">
+				<div id="about">
+					<table>
+						<thead>
+							<tr>
+								<th>Setting</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Version</td>
+								<td><code data-bind="text: Cassette.Version"></code></td>
+							</tr>
+							<tr>
+								<td>Source Directory</td>
+								<td>
+									<code data-bind="text: Cassette.SourceDirectory"></code>
+								</td>
+							</tr>
+							<tr>
+								<td>Cache Directory</td>
+								<td><code data-bind="text: Cassette.CacheDirectory"></code></td>
+							</tr>
+							<tr>
+								<td>IsDebuggingEnabled</td>
+								<td><code data-bind="text: Cassette.IsDebuggingEnabled"></code></td>
+							</tr>
+							<tr>
+								<td>IsHtmlRewritingEnabled</td>
+								<td><code data-bind="text: Cassette.IsHtmlRewritingEnabled"></code></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<p data-bind="visible: !Cassette.IsDebuggingEnabled">
+						<button id="rebuild-cache">Rebuild Bundle Cache</button>
+					</p>
+
+					<p>Cassette Copyright &copy; 2011 Andrew Davey <a href="http://getcassette.net/">getcassette.net</a></p>
+					<p>Cassette.Owin Copyright &copy; 2013 Brian Surowiec <a href="http://github.com/xt0rted/cassette.owin/">GitHub</a></p>
+				</div>
+				<div id="scripts">
+					<ul data-bind="foreach: Scripts">
+						<li class="bundle">
+							<h3>
+								<a data-bind="text: Path, attr: { href: Url }"></a> <span data-bind="	visible: Size !== -1">- <code><span data-bind="	text: Size"></span> bytes</code></span>
+							</h3>
+							<ul data-bind="foreach: Assets">
+								<li>
+									<a data-bind="text: Path, attr: { href: Url }"></a>
+								</li>
+							</ul>
+							<p data-bind="visible: References.length">References: <span data-bind="	text: References.join(', ')"></span></p>
+						</li>
+					</ul>
+					<p data-bind="if: Scripts.length === 0">(None)</p>
+				</div>
+				<div id="stylesheets">
+					<ul data-bind="foreach: Stylesheets">
+						<li class="bundle">
+							<h3>
+								<a data-bind="text: Path, attr: { href: Url }"></a> <span data-bind="	visible: Size !== -1">- <code><span data-bind="	text: Size"></span> bytes</code></span>
+							</h3>
+							<ul data-bind="foreach: Assets">
+								<li>
+									<a data-bind="text: Path, attr: { href: Url }"></a>
+								</li>
+							</ul>
+							<p data-bind="visible: References.length">References: <span data-bind="	text: References.join(', ')"></span></p>
+						</li>
+					</ul>
+					<p data-bind="if: Stylesheets.length === 0">(None)</p>
+				</div>
+				<div id="htmltemplates">
+					<ul data-bind="foreach: HtmlTemplates">
+						<li class="bundle">
+							<h3>
+								<a data-bind="text: Path, attr: { href: Url }"></a> <span data-bind="	visible: Size !== -1">- <code><span data-bind="	text: Size"></span> bytes</code></span>
+							</h3>
+							<ul data-bind="foreach: Assets">
+								<li>
+									<a data-bind="text: Path, attr: { href: Url }"></a>
+								</li>
+							</ul>
+							<p data-bind="visible: References.length">References: <span data-bind="	text: References.join(', ')"></span></p>
+						</li>
+					</ul>
+					<p data-bind="if: HtmlTemplates.length === 0">(None)</p>
+				</div>
+				<div id="trace">
+					<pre data-bind="text: StartupTrace, visible: StartupTrace"></pre>
+					<div data-bind="visible: !StartupTrace">
+						<p>
+							To enable Cassette tracing please add this to <code>web.config</code>:
+						</p>
+						<pre>&lt;system.diagnostics&gt;
+    &lt;sources&gt;
+        &lt;source name="Cassette" switchName="CassetteSwitch" switchType="System.Diagnostics.SourceSwitch" /&gt;
+    &lt;/sources&gt;
+    &lt;switches&gt;
+        &lt;add name="CassetteSwitch" value="All" /&gt;
+    &lt;/switches&gt;
+&lt;/system.diagnostics&gt;</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		$scripts$
+	</body>
+</html>
