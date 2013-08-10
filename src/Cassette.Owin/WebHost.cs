@@ -106,7 +106,7 @@ namespace Cassette.Owin
                 return handler.ProcessRequest(context, path.Substring("/htmltemplate".Length));
             }
 
-            return TaskHelpers.Completed();
+            return context.NotFoundResult();
         }
 
         public Task ProcessRewriteRequest(IOwinContext context, OwinMiddleware next)
