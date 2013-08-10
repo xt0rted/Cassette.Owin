@@ -37,6 +37,7 @@ namespace Cassette.Owin
             Container.Register<ICassetteRequestHandler, BundleRequestHandler<ScriptBundle>>("ScriptBundleRequestHandler").AsPerRequestSingleton(CreateRequestLifetimeProvider());
             Container.Register<ICassetteRequestHandler, BundleRequestHandler<StylesheetBundle>>("StylesheetBundleRequestHandler").AsPerRequestSingleton(CreateRequestLifetimeProvider());
             Container.Register<ICassetteRequestHandler, BundleRequestHandler<HtmlTemplateBundle>>("HtmlTemplateBundleRequestHandler").AsPerRequestSingleton(CreateRequestLifetimeProvider());
+            Container.Register<ICassetteRequestHandler, RawFileRequestHandler>("RawFileRequestHandler").AsPerRequestSingleton(CreateRequestLifetimeProvider());
 
             base.ConfigureContainer();
 
@@ -60,7 +61,7 @@ namespace Cassette.Owin
             return AppDomain.CurrentDomain.GetAssemblies();
         }
 
-        public Task ProcessRequest(IOwinContext context)
+        public Task ProcessRequest(IOwinContext context, OwinMiddleware next)
         {
             var path = context.Request.Path.Substring(_options.RouteRoot.Length);
 
@@ -104,6 +105,14 @@ namespace Cassette.Owin
             {
                 var handler = Container.Resolve<ICassetteRequestHandler>("HtmlTemplateBundleRequestHandler");
                 return handler.ProcessRequest(context, path.Substring("/htmltemplate".Length));
+            }
+
+            // ToDo: move path to const
+            if (path.StartsWith("/file", StringComparison.OrdinalIgnoreCase))
+            {
+                var handler = Container.Resolve<ICassetteRequestHandler>("RawFileRequestHandler");
+                var resultTask = handler.ProcessRequest(context, path.Substring("/file".Length));
+                return resultTask ?? next.Invoke(context);
             }
 
             return context.NotFoundResult();

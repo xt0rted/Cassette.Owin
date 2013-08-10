@@ -63,6 +63,7 @@
     <Compile Include="Infrastructure\DelegatingStream.cs" />
     <Compile Include="Infrastructure\PlaceholderReplacingResponseStream.cs" />
     <Compile Include="Infrastructure\SwitchingStream.cs" />
+    <Compile Include="RawFileRequestHandler.cs" />
     <Compile Include="WebHost.cs" />
     <Compile Include="DiagnosticBundleConfiguration.cs" />
     <Compile Include="DiagnosticRequestHandler.cs" />
