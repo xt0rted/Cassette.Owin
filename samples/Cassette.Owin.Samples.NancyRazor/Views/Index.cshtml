@@ -89,6 +89,7 @@ public class Startup
 			// by default this is /cassette
 			RouteRoot = "/asset-route"
 		});
+		app.UseStaticFiles();
 		app.UseNancy();
 	}
 }

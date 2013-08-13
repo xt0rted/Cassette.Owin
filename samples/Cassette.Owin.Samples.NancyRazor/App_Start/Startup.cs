@@ -10,6 +10,10 @@ namespace Cassette.Owin.Samples.NancyRazor
             {
                 RouteRoot = "/asset-route"
             });
+
+            // in some scenarios cassette.owin offloads serving up static files to the static file middleware instead of streaming them directly
+            app.UseStaticFiles();
+
             app.UseNancy();
         }
     }
