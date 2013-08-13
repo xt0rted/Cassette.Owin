@@ -1,0 +1,167 @@
+﻿@{
+	// css
+	Html.Reference("Content");
+
+	// scripts
+	Html.Reference("Scripts");
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cassette.Owin.Samples.NancyRazor</title>
+		@Html.RenderStylesheets()
+	</head>
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+			<div class="container">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="/">Cassette.Owin</a>
+
+				<div class="nav-collapse collapse bs-navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/asset-route">Diagnostics</a></li>
+					</ul>
+
+					<ul class="nav navbar-nav pull-right" role="menu" aria-labelledby="dropdownMenu">
+						<li class="dropdown">
+							<a class="dropdown-toggle" href="#" data-toggle="dropdown">
+								Account <i class="caret"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a tabindex="1" href="#">
+										<i class="glyphicon glyphicon-user"></i>
+										Profile
+									</a>
+								</li>
+								<li>
+									<a tabindex="1" href="#">
+										<i class="glyphicon glyphicon-cog"></i>
+										Settings
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a tabindex="1" href="#">
+										<i class="glyphicon glyphicon-remove"></i>
+										Sign Out
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<h1>Cassette.Owin Sample</h1>
+
+			<p class="lead">
+				Cassette.Owin is <a href="http://owin.org/">Owin</a> middleware that lets you use <a href="http://getcassette.net/">Cassette</a> without the need for System.Web
+			</p>
+
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#csharp" data-toggle="tab">c#</a></li>
+				<li><a href="#razor" data-toggle="tab">razor</a></li>
+				<li><a href="#webconfig" data-toggle="tab">web.config</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="csharp">
+					<pre>
+public class Startup
+{
+	public static void Configuration(IAppBuilder app)
+	{
+		app.UseCassette(new CassetteOptions
+		{
+			// by default this is /cassette
+			RouteRoot = "/asset-route"
+		});
+		app.UseNancy();
+	}
+}
+
+public class CassetteConfiguration : IConfiguration&lt;bundlecollection&gt;
+{
+	public void Configure(BundleCollection bundles)
+	{
+		bundles.Add&lt;scriptbundle&gt;("Scripts");
+		bundles.Add&lt;stylesheetbundle&gt;("Content");
+	}
+}
+
+public class CassetteFileAuthorizationConfiguration : IConfiguration&lt;ifileaccessauthorization&gt;
+{
+	public void Configure(IFileAccessAuthorization authorization)
+	{
+		authorization.AllowAccess(path => path.StartsWith("/Content", StringComparison.OrdinalIgnoreCase));
+	}
+}
+</pre>
+				</div>
+
+				<div class="tab-pane" id="razor">
+					<pre>&#x0040;{
+	Html.Reference("Content");
+	Html.Reference("Scripts");
+}
+&lt;html&gt;
+	&lt;head&gt;
+		&#x0040;Html.RenderStylesheets()
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div&gt;hello.&lt;/div&gt;
+		&#x0040;Html.RenderScripts()
+	&lt;/body&gt;
+&lt;/html&gt;</pre>
+				</div>
+
+				<div class="tab-pane" id="webconfig">
+					<p>Your <code>web.config</code> will need to be updated with the following settings for this to work.</p>
+					<pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+	&lt;configSections&gt;
+		&lt;section name="cassette" type="Cassette.CassetteConfigurationSection" /&gt;
+	&lt;/configSections&gt;
+
+	&lt;!-- setting debug to false will turn on bundling & minification --&gt;
+	&lt;cassette debug="true" allowRemoteDiagnostics="false" /&gt;
+
+	&lt;system.diagnostics&gt;
+		&lt;sources&gt;
+			&lt;source name="Cassette" switchName="CassetteSwitch" switchType="System.Diagnostics.SourceSwitch" /&gt;
+		&lt;/sources&gt;
+		&lt;switches&gt;
+			&lt;add name="CassetteSwitch" value="All" /&gt;
+		&lt;/switches&gt;
+	&lt;/system.diagnostics&gt;
+
+	&lt;system.webServer&gt;
+		&lt;security&gt;
+			&lt;requestFiltering&gt;
+				&lt;fileExtensions&gt;
+					&lt;remove fileExtension=".resources" /&gt;
+				&lt;/fileExtensions&gt;
+			&lt;/requestFiltering&gt;
+		&lt;/security&gt;
+	&lt;/system.webServer&gt;
+&lt;/configuration&gt;</pre>
+				</div>
+			</div>
+		</div>
+
+		@Html.RenderScripts()
+	</body>
+</html>

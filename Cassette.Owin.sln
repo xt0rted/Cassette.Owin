@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A966C7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cassette.Owin.ViewEngines.NancyRazor", "src\Cassette.Owin.ViewEngines.NancyRazor\Cassette.Owin.ViewEngines.NancyRazor.csproj", "{5778D739-CBDD-4279-8880-304BD931A78B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{DE6B52E1-B598-4C9B-A00E-26AC7F0CF5AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cassette.Owin.Samples.NancyRazor", "samples\Cassette.Owin.Samples.NancyRazor\Cassette.Owin.Samples.NancyRazor.csproj", "{7172C961-30A5-4FB1-9FD2-ECEA5810CE58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,8 +38,15 @@ Global
 		{5778D739-CBDD-4279-8880-304BD931A78B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5778D739-CBDD-4279-8880-304BD931A78B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5778D739-CBDD-4279-8880-304BD931A78B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7172C961-30A5-4FB1-9FD2-ECEA5810CE58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7172C961-30A5-4FB1-9FD2-ECEA5810CE58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7172C961-30A5-4FB1-9FD2-ECEA5810CE58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7172C961-30A5-4FB1-9FD2-ECEA5810CE58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7172C961-30A5-4FB1-9FD2-ECEA5810CE58} = {DE6B52E1-B598-4C9B-A00E-26AC7F0CF5AE}
 	EndGlobalSection
 EndGlobal
