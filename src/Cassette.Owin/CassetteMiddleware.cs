@@ -72,12 +72,14 @@ namespace Cassette.Owin
 
             _host.StoreRequestContainerInOwinContext();
 
-            if (!context.Request.Path.StartsWith(_options.RouteRoot))
+            var path = context.Request.Path;
+
+            if (path.StartsWith(_options.RouteRoot) && (path.Length == _options.RouteRoot.Length || path[_options.RouteRoot.Length] == '/'))
             {
-                return _host.ProcessRewriteRequest(context, Next);
+                return _host.ProcessRequest(context, Next);
             }
 
-            return _host.ProcessRequest(context, Next);
+            return _host.ProcessRewriteRequest(context, Next);
         }
     }
 }
