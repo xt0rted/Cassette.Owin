@@ -13,24 +13,24 @@ More detailed examples may be found in the [samples](/samples) folder.
 
 #### Basic Setup
 
-<pre>
+```csharp
 public class Startup
 {
-	public static void Configuration(IAppBuilder app)
-	{
-		app.UseCassette(new CassetteOptions
-		{
-			// by default this is /cassette
-			RouteRoot = "/asset-route"
-		});
+    public static void Configuration(IAppBuilder app)
+    {
+        app.UseCassette(new CassetteOptions
+        {
+            // by default this is /cassette
+            RouteRoot = "/asset-route"
+        });
 
-		// for now Cassette.Owin requires Microsoft.StaticFiles
-		app.UseStaticFiles();
+        // for now Cassette.Owin requires Microsoft.StaticFiles
+        app.UseStaticFiles();
 
-		app.UseNancy();
-	}
+        app.UseNancy();
+    }
 }
-</pre>
+```
 
 #### Diagnostics
 
