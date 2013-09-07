@@ -72,7 +72,7 @@ namespace Cassette.Owin
 
             _host.StoreRequestContainerInOwinContext();
 
-            var path = context.Request.Path;
+            var path = context.Request.Path.ToString();
 
             if (path.StartsWith(_options.RouteRoot) && (path.Length == _options.RouteRoot.Length || path[_options.RouteRoot.Length] == '/'))
             {

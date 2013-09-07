@@ -53,7 +53,7 @@ namespace Cassette.Owin
 
             // to serve up the actual file from disk we rewrite the path and pass it off to the
             // next piece of middleware in hopes of the static file being handled down the line
-            context.Request.Path = path;
+            context.Request.Path = new PathString(path);
             return null;
         }
 

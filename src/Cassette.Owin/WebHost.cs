@@ -63,7 +63,7 @@ namespace Cassette.Owin
 
         public Task ProcessRequest(IOwinContext context, OwinMiddleware next)
         {
-            var path = context.Request.Path.Substring(_options.RouteRoot.Length);
+            var path = context.Request.Path.ToString().Substring(_options.RouteRoot.Length);
 
             if (string.IsNullOrWhiteSpace(path))
             {
