@@ -78,7 +78,7 @@ namespace Cassette.Owin
             var scripts = _getReferenceBuilder().Render<ScriptBundle>(null);
 
             html = html.Replace("$scripts$", scripts);
-            context.Response.ContentType = "text/html";
+            context.Response.ContentType = Constants.TextHtml;
             return context.Response.WriteAsync(html);
         }
 

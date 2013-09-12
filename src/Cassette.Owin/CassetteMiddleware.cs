@@ -28,7 +28,7 @@ namespace Cassette.Owin
             _options = options;
 
             var context = new OwinContext(builder.Properties);
-            var token = context.Get<CancellationToken>("host.OnAppDisposing"); // ToDo: move out to a const
+            var token = context.Get<CancellationToken>(Constants.HostappDisposingKey);
             if (token != CancellationToken.None)
             {
                 token.Register(() =>
@@ -53,6 +53,8 @@ namespace Cassette.Owin
 
         public override Task Invoke(IOwinContext context)
         {
+            context.Environment.Add(Constants.TimestampKey, DateTime.UtcNow);
+
             _contextLocal.Value = context;
             lock (Lock)
             {

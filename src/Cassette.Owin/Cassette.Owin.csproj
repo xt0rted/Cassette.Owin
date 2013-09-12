@@ -61,6 +61,7 @@
     <Compile Include="CassetteMiddlewareContext.cs" />
     <Compile Include="CassetteOptions.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Infrastructure\DelegatingStream.cs" />
     <Compile Include="Infrastructure\PlaceholderReplacingResponseStream.cs" />
     <Compile Include="Infrastructure\SwitchingStream.cs" />

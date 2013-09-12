@@ -4,6 +4,8 @@ using Cassette.Utilities;
 
 using Microsoft.Owin;
 
+using Trace = Cassette.Diagnostics.Trace;
+
 namespace Cassette.Owin
 {
     public class RawFileRequestHandler : ICassetteRequestHandler
@@ -19,6 +21,10 @@ namespace Cassette.Owin
 
         public Task ProcessRequest(IOwinContext context, string path)
         {
+            Trace.Source.TraceInformation("Handling asset request for path \"{0}\"", path);
+
+            var request = context.Request;
+            var response = context.Response;
             var originalPath = path;
 
             path = RemoveHashFromPath(path);
@@ -34,18 +40,19 @@ namespace Cassette.Owin
             var hash = _fileContentHasher.Hash(pathToHash).ToHexString();
 
             var actualETag = "\"" + hash + "\"";
-            var givenETag = context.Request.Headers["If-None-Match"];
 
             if (originalPath.Contains(hash))
             {
-                // ToDo: set cache headers
-                context.Response.ETag = actualETag;
+                response.CacheForOneYear(actualETag);
+                // ToDo: add sliding expiration support?
             }
             else
             {
-                // ToDo: set no cache headers
+                response.DoNotCache();
+                response.Headers.AddCacheControlNoStore();
             }
 
+            var givenETag = request.Headers[Constants.IfNoneMatch];
             if (givenETag == actualETag)
             {
                 return context.NotModifiedResult();
@@ -53,7 +60,7 @@ namespace Cassette.Owin
 
             // to serve up the actual file from disk we rewrite the path and pass it off to the
             // next piece of middleware in hopes of the static file being handled down the line
-            context.Request.Path = new PathString(path);
+            request.Path = new PathString(path);
             return null;
         }
 

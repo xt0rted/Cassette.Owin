@@ -54,7 +54,7 @@ namespace Cassette.Owin
         public InterceptMode InterceptOnce()
         {
             var contentType = _context.Response.ContentType;
-            if (contentType != "text/html" && contentType != "application/xhtml+xml")
+            if (contentType != Constants.TextHtml && contentType != Constants.ApplicationXhtmlXml)
             {
                 _rewritingStream = _originalResponseBody;
                 return InterceptMode.RewritingStream;
