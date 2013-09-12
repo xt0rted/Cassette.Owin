@@ -67,7 +67,7 @@ namespace Cassette.Owin
                 if (form["action"] == "rebuild-cache")
                 {
                     _bundleCacheRebuilder.RebuildCache();
-                    return TaskHelpers.Completed();
+                    return Constants.CompletedTask;
                 }
             }
 

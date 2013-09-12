@@ -16,13 +16,13 @@ namespace Cassette.Owin
         public static Task NotFoundResult(this IOwinContext context)
         {
             context.Response.StatusCode = 404;
-            return TaskHelpers.Completed();
+            return Constants.CompletedTask;
         }
 
         public static Task NotModifiedResult(this IOwinContext context)
         {
             context.Response.StatusCode = 304;
-            return TaskHelpers.Completed();
+            return Constants.CompletedTask;
         }
 
         public static Task ReturnStream(this IOwinContext context, Stream stream)

@@ -92,11 +92,11 @@ namespace Cassette.Owin
             switch (interceptMode)
             {
                 case InterceptMode.DoingNothing:
-                    return TaskHelpers.Completed();
+                    return Constants.CompletedTask;
 
                 case InterceptMode.RewritingStream:
                     _rewritingStream.Close();
-                    return TaskHelpers.Completed();
+                    return Constants.CompletedTask;
             }
 
             throw new NotImplementedException();
