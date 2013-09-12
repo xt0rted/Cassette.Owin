@@ -4,7 +4,7 @@ Owin middleware for [Cassette](https://github.com/andrewdavey/cassette)
 
 This is an Owin implementation of Cassette.Aspnet to allow serving assets independently from your site's framework and without the need for System.Web.
 
-**WARNING:** This project **is not** production ready. It's currently missing cache headers, tests, and a number of other things marked with `ToDo` comments. For these reasons there is currently no NuGet package for it.
+**WARNING:** This project currently has no unit tests. Because of this there is no NuGet package for it yet.
 
 
 ## Usage
