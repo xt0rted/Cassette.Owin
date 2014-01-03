@@ -52,8 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Packages\Microsoft.Owin.StaticFiles\StreamCopyOperation.cs" />
-    <Compile Include="App_Packages\TaskHelpers.Sources.0.2\TaskHelpers.cs" />
-    <Compile Include="App_Packages\TaskHelpers.Sources.0.2\TaskHelpersExtensions.cs" />
+    <Compile Include="App_Packages\TaskHelpers.Sources.0.3\TaskHelpers.cs" />
+    <Compile Include="App_Packages\TaskHelpers.Sources.0.3\TaskHelpersExtensions.cs" />
     <Compile Include="AssetRequestHandler.cs" />
     <Compile Include="BundleRequestHandler.cs" />
     <Compile Include="CassetteExtensions.cs" />
