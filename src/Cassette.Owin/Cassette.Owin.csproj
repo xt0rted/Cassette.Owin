@@ -35,9 +35,9 @@
     <Reference Include="AjaxMin">
       <HintPath>..\..\packages\AjaxMin.4.84.4790.14417\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette, Version=2.3.0.21958, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette, Version=2.4.0.18555, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Cassette.2.3.0\lib\net40-client\Cassette.dll</HintPath>
+      <HintPath>..\..\packages\Cassette.2.4.0\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
